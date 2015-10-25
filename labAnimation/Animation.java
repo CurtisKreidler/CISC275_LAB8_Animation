@@ -23,20 +23,31 @@ public class Animation extends JPanel {
     final static int frameHeight = 300;
     final static int imgWidth = 165;
     final static int imgHeight = 165;
+    boolean north = false;
+    boolean south = true;
+    boolean east = true;
+    boolean west = false;
 
     //Override this JPanel's paint method to cycle through picture array and draw images
     public void paint(Graphics g) {
     	picNum = (picNum + 1) % frameCount;
-	while(xloc <= frameWidth - imgWidth && yloc <= frameHeight - img Height){
-		if(xloc >= frameWidth - imgWidth || yloc >= frameHeight - imgHeight){
-    			g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);   	
-		}	
-	
-	else{ g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);}
-    
+	if(xloc>= frameWidth - imgWidth && yloc<= frameHeight - imgHeight){
+		g.drawImage(pics[picNum], xloc-=xIncr, yloc+=yIncr, Color.gray, this);		
+	}
+	if(xloc>= frameWidth - imgWidth && yloc>= frameHeight - imgHeight){
+         	g.drawImage(pics[picNum], xloc-=xIncr, yloc-=yIncr, Color.gray, this);   
+        }
+	if(xloc<= frameWidth - imgWidth && yloc>= frameHeight - imgHeight){
+         	g.drawImage(pics[picNum], xloc+=xIncr, yloc-=yIncr, Color.gray, this);   
+        }
+	if(xloc<= frameWidth - imgWidth && yloc<= frameHeight - imgHeight){
+		g.drawImage(pics[picNum], xloc+=xIncr, yloc+=yIncr, Color.gray, this);         
+        }	   		
+				 	
+			
 	// TODO: Keep the orc from walking off-screen, turn around when bouncing off walls.
 		//Be sure that animation picture direction matches what is happening on screen.
-    }
+	
 }
     //Make frame, loop on repaint and wait
     public static void main(String[] args) {
